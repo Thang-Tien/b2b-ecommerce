@@ -265,8 +265,8 @@ router.put(
 // all sellers --- for admin
 router.get(
   "/admin-all-sellers",
-  isAuthenticated,
-  isAdmin("Admin"),
+  // isAuthenticated,
+  // isAdmin("Admin"),
   catchAsyncErrors(async (req, res, next) => {
     try {
       const sellers = await Shop.find().sort({
