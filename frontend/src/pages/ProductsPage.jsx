@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import Loader from "../components/Layout/Loader";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
+import Card from "../components/Card/Card/Card"
+import { getAllSellers } from "../redux/actions/sellers";
 
 const ProductsPage = () => {
   
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
   const {allProducts,isLoading} = useSelector((state) => state.products);
+  const { sellers } = useSelector((state) => state.seller);
   const [data, setData] = useState([]);
+  const [supplier, setSupplier] = useState([]);
   const [active, setActive] = useState(1);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllSellers());
+  }, [dispatch]);
 
   useEffect(() => {
     if (categoryData === null) {
@@ -26,6 +35,12 @@ const ProductsPage = () => {
     }
     //    window.scrollTo(0,0);
   }, [allProducts]);
+
+  useEffect(() => {
+      const d = sellers;
+      setSupplier(d);
+    }
+  , [sellers]);
 
   return (
   <>
@@ -101,9 +116,9 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="w-3/4 mr-5 grid grid-cols-1 mb-12 ">
-                {data && data.map((i, index) => <ProductCard data={i} key={index} />)}
+                {supplier && supplier.map((i, index) => <Card data={i} key={index} />)}
               </div>
-              {data && data.length === 0 ? (
+              {supplier && supplier.length === 0 ? (
                 <h1 className="text-center w-full pb-[100px] text-[20px]">
                   No products Found!
                 </h1>) : null}
@@ -121,9 +136,9 @@ const ProductsPage = () => {
                 </div>
               </div>
               <div className="w-3/4 mr-5 grid grid-cols-1 mb-12">
-                {data && data.map((i, index) => <ProductCard data={i} key={index} />)}
+                {supplier && supplier.map((i, index) => <Card data={i} key={index} />)}
               </div>
-              {data && data.length === 0 ? (
+              {supplier && supplier.length === 0 ? (
                 <h1 className="text-center w-full pb-[100px] text-[20px]">
                   No products Found!
                 </h1>) : null}
