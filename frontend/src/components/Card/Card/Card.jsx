@@ -28,6 +28,19 @@ const ProductCard = ({ data,isEvent }) => {
   const [click, setClick] = useState(false);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const person = {
+    name: 'John Doe',
+    age: 30,
+    address: {
+     street: '123 Main St',
+     city: 'Anytown',
+     state: 'Anystate'
+    },
+    love : [1,2,3,4],
+    greet: function() {
+     console.log(`Hello, my name is ${this.name}`);
+    }
+   };
 
   useEffect(() => {
     if (wishlist && wishlist.find((i) => i._id === data._id)) {
@@ -111,15 +124,34 @@ const ProductCard = ({ data,isEvent }) => {
           
         </div>
 
-        <div>
-          <div>Ratings & Reviews 4.8/5 (19 reviews)</div>
-          <div>Factory capability</div>
-          <div>· Supplier assessment procedures</div>
-            <div>· ODM service available</div>
+         <div className="w-full flex justify-between mt-3">
+          <div className="text-[14px]">
+            <div>
+              <div className="text-slate-500">Ratings & Reviews </div>
+              <div><span className="font-[700]">4.8</span>/5 (19 reviews)</div>
+              
+            </div>
+            
+            <div className="mt-5">
+            <div className="text-slate-500" >Factory capability</div>
+            {person && person.love.map((i, index) => {
+                    return (
+                      <div className="font-[700]">· ${i[index]}</div>
+                    );
+                  })}
+            <div className="font-[700]">· Supplier assessment procedures</div>
+              <div>· ODM service available</div>
+            </div>
+          </div>
 
-
+          <div className=" ">
+            <div className="mr-0">
+              <img src={`${backend_url}${data.avatar}`} alt="" className="w-[250px] h-[200px] "/>
+            </div>
+        
         </div>
-
+         </div>
+        
                
 
         
