@@ -94,7 +94,9 @@ const ProductCard = ({ data,isEvent }) => {
             <div className="ml-3">
             
               <div className="text-[20px] font-[600] underline decoration-2">{data.name}</div>
-              <div className="text-[12px]">8 yrs ·20+ nhân viên ·380+ m² · US $160,000+</div>
+
+              <img src="https://img.alicdn.com/imgextra/i2/O1CN01YDryn81prCbNwab4Q_!!6000000005413-2-tps-168-42.png" width="45"></img>
+             
             </div>
             
             
@@ -138,11 +140,11 @@ const ProductCard = ({ data,isEvent }) => {
             
             <div className="mt-5">
             <div className="text-slate-500" >Factory capability</div>
-            {imageUrl.url.map((i, index) => {
+            {/* {data.capability.map((i, index) => {
                     return (
-                      <div className="font-[700]">{index}</div>
+                      <div className="font-[700]">{i}</div>
                     );
-                  })}
+                  })} */}
             </div>
           </div>
 
