@@ -31,7 +31,6 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
       return next(new ErrorHandler("User already exists", 400));
     }
 
-    console.log(req)
     const filename = req.file.filename;
     console.log("filename: ", filename);
     const fileUrl = path.join(filename);

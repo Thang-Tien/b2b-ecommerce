@@ -17,21 +17,75 @@ shops.find().then((documents) => {
 
     // Iterate over each document and update it
     documents.forEach(document => {
-        const shopId = document.name;
-        // Create an array of image names based on the shop_id
-        const images = [
-            `${shopId}_img1.png`,
-            `${shopId}_img2.png`,
-            `${shopId}_img3.png`
-        ];
+
 
         console.log(document._id.toString());
-        // Update the document by adding the "images" field
+        // update capabilities field
+        // try {
+        //     const randomList = getRandomNumbers();
+        //     shops.updateOne(
+        //         { _id: document._id }, // Use the appropriate identifier for your documents
+        //         {
+        //             $set: {
+        //                 capabilities: [
+        //                     capabilityList[randomList[0]],
+        //                     capabilityList[randomList[1]],
+        //                     capabilityList[randomList[2]],
+        //                     capabilityList[randomList[3]],
+        //                     capabilityList[randomList[4]],
+        //                 ]
+        //             }
+        //         }
+        //     ).then(result => {
+        //         console.log(result);
+        //     })
+        // } catch (e) {
+        //     console.log(e)
+        // }
+
+        // update images field
+
+        // const shopId = document.name;
+
+        // Create an array of image names based on the shop_id
+        // const images = [
+        //     `${shopId}_img1.png`,
+        //     `${shopId}_img2.png`,
+        //     `${shopId}_img3.png`
+        // ];
+
+        // try {
+        //     const randomList = getRandomNumbers();
+        //     shops.updateOne(
+        //         { _id: document._id }, // Use the appropriate identifier for your documents
+        //         {
+        //             $set: {
+        //                 images: images
+        //             }
+        //         }
+        //     ).then(result => {
+        //         console.log(result);
+        //     })
+        // } catch (e) {
+        //     console.log(e)
+        // }
+
+        // 
+
+        // update type
         try {
+            var type = "";
+            if (Math.round(Math.random()) == 0) {
+                type = "Supplier";
+            } else {
+                type = "Manufacturer"
+            }
             shops.updateOne(
                 { _id: document._id }, // Use the appropriate identifier for your documents
                 {
-                    $set: { images: images }
+                    $set: {
+                        type: type
+                    }
                 }
             ).then(result => {
                 console.log(result);
