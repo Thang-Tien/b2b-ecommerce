@@ -151,7 +151,7 @@ const ProductCard = ({ data,isEvent }) => {
           <div className="Ảnh">
             <div className="mr-0 relative">
               <button className = "absolute top-1/2 left-1 text-white font-[800]" onClick={subImage}> &lt;  </button>
-              <img src={data.images[image]} alt="" className="rounded-md w-[250px] h-[220px] "/>
+              <img src={`${backend_url}${data.images[image]}`} alt="" className="rounded-md w-[250px] h-[220px] "/>
               <button className = "absolute top-1/2 right-1 text-white font-[800]" onClick={preImage}> &gt;  </button>
             </div>
           </div>
