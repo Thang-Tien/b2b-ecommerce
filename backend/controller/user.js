@@ -14,10 +14,8 @@ const user = require("../model/user");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
-    console.log(req.body)
     const { name, email, password } = req.body;
     const userEmail = await User.findOne({ email });
-    console.log("check user email", userEmail);
     if (userEmail) {
       const filename = req.file.filename;
       const filePath = `uploads/${filename}`;
@@ -39,7 +37,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
       password: password,
       avatar: fileUrl,
     };
-
+     
     const activationToken = createActivationToken(user);
 
     const activationUrl = `http://localhost:3000/activation/${activationToken}`;

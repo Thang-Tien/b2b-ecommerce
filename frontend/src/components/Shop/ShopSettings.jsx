@@ -96,6 +96,7 @@ const ShopSettings = () => {
           <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
               <label className="block pb-2">Shop Name</label>
+              <div> {seller.avatar}</div>
             </div>
             <input
               type="name"

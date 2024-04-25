@@ -17,30 +17,21 @@ shops.find().then((documents) => {
 
     // Iterate over each document and update it
     documents.forEach(document => {
-        const shopId = removeVietnameseTones(document.name);
+        const shopId = document.name;
         // Create an array of image names based on the shop_id
         const images = [
-            `${shopId}_img1`,
-            `${shopId}_img2`,
-            `${shopId}_img3`
+            `${shopId}_img1.png`,
+            `${shopId}_img2.png`,
+            `${shopId}_img3.png`
         ];
 
         console.log(document._id.toString());
         // Update the document by adding the "images" field
         try {
-            const randomList = getRandomNumbers();
             shops.updateOne(
                 { _id: document._id }, // Use the appropriate identifier for your documents
                 {
-                    $set: {
-                        capabilities: [
-                            capabilityList[randomList[0]],
-                            capabilityList[randomList[1]],
-                            capabilityList[randomList[2]],
-                            capabilityList[randomList[3]],
-                            capabilityList[randomList[4]],
-                        ]
-                    }
+                    $set: { images: images }
                 }
             ).then(result => {
                 console.log(result);

@@ -50,6 +50,7 @@ const ShopCreate = () => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
+    console.log(file)
     setAvatar(file);
   };
 
