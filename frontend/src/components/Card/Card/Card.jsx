@@ -93,7 +93,7 @@ const ProductCard = ({ data,isEvent }) => {
             />
             <div className="ml-3">
             
-              <div className="text-[20px] font-[600] underline decoration-2">{data.name}</div>
+              <div className="text-[20px] font-[600] underline decoration-2 hover:text-orange-600">{data.name} Co., Ltd.</div>
 
               <img src="https://img.alicdn.com/imgextra/i2/O1CN01YDryn81prCbNwab4Q_!!6000000005413-2-tps-168-42.png" width="45"></img>
              
@@ -123,8 +123,8 @@ const ProductCard = ({ data,isEvent }) => {
               
               {open ? <ShopPreviewPage /> : null}
             </div>
-            <button className="rounded-full bg-white border border-black px-3 h-[30px] text-black font-[600] mr-10">Contact Supplier</button>
-            <button className="rounded-full bg-orange-600 px-3 h-[30px] text-white font-[600]">View Profile</button>
+            <button className="rounded-full bg-white border border-black px-3 h-[30px] text-black font-[600] mr-10 hover:bg-gray-400">Contact Supplier</button>
+            <button className="rounded-full bg-orange-600 px-3 h-[30px] text-white font-[600] hover:bg-gray-400">View Profile</button>
 
           </div>
           
