@@ -36,6 +36,13 @@ const shopSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  images: [],
+  capabilities: [
+    {
+      type: String,
+    }
+  ],
+  type: { type: String },
   zipCode: {
     type: Number,
     required: true,
@@ -80,6 +87,11 @@ shopSchema.pre("save", async function (next) {
     next();
   }
   this.password = await bcrypt.hash(this.password, 10);
+});
+
+shopSchema.pre(/^find/, async function (next) {
+  this.find({})
+  next();
 });
 
 // jwt token
