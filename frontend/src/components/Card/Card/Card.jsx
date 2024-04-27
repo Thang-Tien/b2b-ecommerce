@@ -80,7 +80,7 @@ const ProductCard = ({ data,isEvent }) => {
   };
 
   return (
-    <Link to={`/shop/preview/${data._id}`}>
+  
       <div className="mb-3 w-full h-[340px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
         <div className="flex justify-end">
         </div>
@@ -168,7 +168,7 @@ const ProductCard = ({ data,isEvent }) => {
         {/* side options */}
         
       </div>
-    </Link>
+    
   );
 };
 
