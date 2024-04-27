@@ -12,9 +12,12 @@ import Active2 from "../components/Search/Active2";
 import Active3 from "../components/Search/Active3";
 const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  
+ 
   const handleChange = (event) => { 
     setSelectedCategory(event.target.value);
   };
+  
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
   const { allProducts, isLoading } = useSelector((state) => state.products);
@@ -23,20 +26,6 @@ const ProductsPage = () => {
   const [supplier, setSupplier] = useState([]);
   const [active, setActive] = useState(1);
   const dispatch = useDispatch();
-  function filteredData(products, selected) {
-    let filteredProducts = products;
-
-    // Applying selected filter
-    if (selected) {
-      filteredProducts = filteredProducts.filter(
-        ({ discountPrice,ratings}) =>
-        discountPrice >= selected ||
-        ratings >= selected
-      );
-    }
-
-    return filteredProducts;
-  }
   
   useEffect(() => {
     dispatch(getAllSellers());
@@ -57,10 +46,7 @@ const ProductsPage = () => {
   useEffect(() => {
     const d = sellers;
     setSupplier(d);
-  }
-    , [sellers]);
-    let result = data;
-    result = filteredData(result, selectedCategory);
+  }, [sellers]);
     
     
   return (
@@ -104,7 +90,7 @@ const ProductsPage = () => {
             <br />
 
             {active === 1 && (
-              <Active1 data={result} handleChange={handleChange} ></Active1>
+              <Active1 data={data}  ></Active1>
             )}
 
             {active === 2 && (
