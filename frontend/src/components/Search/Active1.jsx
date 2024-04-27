@@ -1,6 +1,34 @@
 import Input from "../Layout/Input";
 import ProductCard from "../Route/ProductCard/ProductCard";
-const Active1 = ({data,handleChange}) => {
+import {  useEffect, useState } from "react";
+
+const Active1 = ({data}) => {
+  const [price, setPrice] = useState(null);
+  const [rating, setRating] = useState(null);
+  const handleChangePrice = (event) => {
+    setPrice(event.target.value);
+  }
+  const handleChangeRating = (event) => {
+    setRating(event.target.value);
+  }
+  function filteredData(products, price, rating) {
+    let filteredProducts = products;
+
+    // Applying selected filter
+    if (price || rating) {
+      console.log( Number(price.split("-")[1]));
+      filteredProducts = filteredProducts.filter(
+        ({ discountPrice,ratings}) =>
+        (Number(price.split("-")[0]) <= discountPrice) && (discountPrice <= Number(price.split("-")[1]))  &&
+        ratings >= rating
+      );
+    }
+
+    return filteredProducts;
+  }
+  
+  const result = filteredData(data,price,rating)
+
     return (
         <div className="flex justify-between mb-20">
                 <div className="w-1/4 ">
@@ -12,7 +40,7 @@ const Active1 = ({data,handleChange}) => {
                       <div className="flex-col flex text-[15px]">
 
                         <label className="mt-1 flex">
-                          <input onChange={{handleChange}} type="radio" value="" name="sf" />
+                          <input onChange={{}} type="radio" value="" name="sf" />
                           <div className="checkmark ml-2 flex text-[14px]">
                             <img className="max-w-10 max-h-5" src="https://s.alicdn.com/@img/imgextra/i2/O1CN01RTQpCr1aufaXTtWv5_!!6000000003390-2-tps-83-32.png?webp=close" width="45" ></img>
 
@@ -21,7 +49,7 @@ const Active1 = ({data,handleChange}) => {
                         </label>
 
                         <label className="mt-1 flex">
-                          <input onChange={{handleChange}} type="radio" value="" name="sf" />
+                          <input onChange={{}} type="radio" value="" name="sf" />
                           <div className="checkmark ml-2 flex text-[14px]">
                             <img className="" src="https://s.alicdn.com/@img/imgextra/i4/O1CN017JpSfh1MBsEOBrKwl_!!6000000001397-2-tps-135-32.png?webp=close" width="70" ></img>
 
@@ -30,7 +58,7 @@ const Active1 = ({data,handleChange}) => {
                         </label>
 
                         <label className="mt-1 flex">
-                          <input onChange={{handleChange}} type="radio" value="" name="sf" />
+                          <input onChange={{}} type="radio" value="" name="sf" />
                           <div className="checkmark ml-2 text-[14px]">
                             <span></span>≤1h response time
                           </div>
@@ -43,30 +71,30 @@ const Active1 = ({data,handleChange}) => {
                       <div className="mt-5 text-[15px] font-[600] font-Roboto">Price</div>
                       <div className="flex-col flex text-[15px]">
                         <label className="mt-1">
-                          <input onChange={handleChange} type="radio" value="" name="price" />
+                          <input onChange={handleChangePrice} type="radio" value="" name="price" />
                           <span className="checkmark ml-2"></span>All
                         </label>
                         <Input
-                          handleChange={handleChange}
-                          value={0}
+                          handleChange={handleChangePrice}
+                          value={"0-100"}
                           title="$0 - 100"
                           name="price"
                         />
                         <Input
-                          handleChange={handleChange}
-                          value={100}
+                          handleChange={handleChangePrice}
+                          value={"100-500"}
                           title="$100 - 500"
                           name="price"
                         />
                         <Input
-                          handleChange={handleChange}
-                          value={1000}
+                          handleChange={handleChangePrice}
+                          value={"500-1000"}
                           title="$500 - 1000"
                           name="price"
                         />
                         <Input
-                          handleChange={handleChange}
-                          value={1100}
+                          handleChange={handleChangePrice}
+                          value={"1000-999999"}
                           title="Over $1000"
                           name="price"
                         />
@@ -83,19 +111,19 @@ const Active1 = ({data,handleChange}) => {
                       <div className="mt-2 text-[13px] text-slate-400">Based on a 5-star rating system</div>
                       <div className="flex-col flex text-[15px]">
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeRating}
                           value={4}
                           title="4.0 & up"
                           name="review"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeRating}
                           value={4.5}
                           title="4.5 & up"
                           name="review"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeRating}
                           value={5}
                           title="5.0"
                           name="review"
@@ -111,7 +139,7 @@ const Active1 = ({data,handleChange}) => {
                     No products Found!
                   </h1>) : 
                   <div className="w-3/4 mr-5 grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-4 lg:gap-[25px] xl:grid-cols-4 xl:gap-[15px] mb-12">
-                  {data && data.map((i, index) => <ProductCard data={i} key={index} />)}
+                  {result && result.map((i, index) => <ProductCard data={i} key={index} />)}
                 </div>}
               </div>
     );
