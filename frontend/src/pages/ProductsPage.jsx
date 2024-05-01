@@ -94,11 +94,11 @@ const ProductsPage = () => {
             )}
 
             {active === 2 && (
-              <Active2 data={supplier} handleChange={handleChange}></Active2>
+              <Active2 data={supplier} ></Active2>
             )}
 
             {active === 3 && (
-              <Active3 data={supplier} handleChange={handleChange}></Active3>
+              <Active3 data={supplier} ></Active3>
             )}
 
             <Footer />
