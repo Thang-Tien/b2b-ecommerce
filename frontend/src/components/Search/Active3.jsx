@@ -1,7 +1,28 @@
 import Input from "../Layout/Input";
 import Card from "../Card/Card/Card"
+import { useState } from "react";
 
 const Active3 = ({data,handleChange}) => {
+  const [capabilitie, setCapabilitie] = useState(null);
+  const [rating, setRating] = useState(null);
+  const handleChangeCapabilitie = (event) => {
+    setCapabilitie(event.target.value);
+  }
+  function filteredData(products, capabilitie) {
+    let filteredProducts = products;
+    
+    // Applying selected filter
+    if (capabilitie) {
+      filteredProducts = filteredProducts.filter(
+        ({ capabilities }) =>
+          capabilities.includes(capabilitie)
+      );
+    }
+    console.log(JSON.stringify(products ));
+    return filteredProducts;
+  }
+
+  const result = filteredData(data,capabilitie);
     return (
         <div className="flex justify-between mb-20">
                 <div className="w-1/4">
@@ -76,49 +97,49 @@ const Active3 = ({data,handleChange}) => {
                       <div className="flex-col flex text-[15px]">
 
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"Supplies Fortune 500 companies"}
                           title="Supplies Fortune 500 companies"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"Design-based customization"}
                           title="Design-based customization"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"R&D capabilities"}
                           title="R&D capabilities"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"Design services"}
                           title="Design services"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"Project solutions"}
                           title="Project solutions"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"OEM for well-known brands"}
                           title="OEM for well-known brands"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"Socially responsible"}
                           title="Socially responsible"
                           name="capabilities"
                         />
                         <Input
-                          handleChange={handleChange}
+                          handleChange={handleChangeCapabilitie}
                           value={"ODM service available"}
                           title="ODM service available"
                           name="capabilities"
@@ -135,7 +156,7 @@ const Active3 = ({data,handleChange}) => {
                     No manufacturer Found!
                   </h1>) : 
                   <div className="w-3/4 mr-5 grid grid-cols-1 mb-12">
-                  {data && data.filter(data => data.type === "Manufacturer").map((i, index) => <Card data={i} key={index} />)}
+                  {result && result.filter(result => result.type === "Manufacturer").map((i, index) => <Card data={i} key={index} />)}
                   </div>}
               </div>
     );
