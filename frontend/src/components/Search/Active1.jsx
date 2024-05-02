@@ -1,6 +1,6 @@
 import Input from "../Layout/Input";
 import ProductCard from "../Route/ProductCard/ProductCard";
-import {  useEffect, useState } from "react";
+import { useState } from "react";
 
 const Active1 = ({data}) => {
   const [price, setPrice] = useState(null);
@@ -16,7 +16,6 @@ const Active1 = ({data}) => {
 
     // Applying selected filter
     if (price || rating) {
-      console.log( Number(price.split("-")[1]));
       filteredProducts = filteredProducts.filter(
         ({ discountPrice,ratings}) =>
         (Number(price.split("-")[0]) <= discountPrice) && (discountPrice <= Number(price.split("-")[1]))  &&

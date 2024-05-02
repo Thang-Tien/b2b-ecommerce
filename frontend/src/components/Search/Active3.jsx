@@ -2,7 +2,7 @@ import Input from "../Layout/Input";
 import Card from "../Card/Card/Card"
 import { useState } from "react";
 
-const Active3 = ({data,handleChange}) => {
+const Active3 = ({data}) => {
   const [capabilitie, setCapabilitie] = useState(null);
   const [rating, setRating] = useState(null);
   const handleChangeCapabilitie = (event) => {
