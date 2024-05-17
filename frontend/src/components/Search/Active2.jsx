@@ -4,24 +4,28 @@ import { useState } from "react";
 
 
 const Active2 = ({data}) => {
-  const [capabilitie, setCapabilitie] = useState(null);
+  const [capabilitie, setCapabilitie] = useState("");
+  const [supplierFeature, setSupplierFeature] = useState("");
   const handleChangeCapabilitie = (event) => {
     setCapabilitie(event.target.value);
   }
-  function filteredData(products, capabilitie) {
+  const handleChangeSupplierFeature = (event) => {
+    setSupplierFeature(event.target.value);
+  }
+  function filteredData(products, capabilitie, supplierFeature) {
     let filteredProducts = products;
     
     // Applying selected filter
-    if (capabilitie) {
+    if (capabilitie || supplierFeature) {
       filteredProducts = filteredProducts.filter(
-        ({ capabilities }) =>
-          capabilities.includes(capabilitie)
+        ({ capabilities, supplierAttribute}) =>
+          (capabilitie!= ""? capabilities.includes(capabilitie) :true)
+        && (supplierFeature!="" ?supplierAttribute.verifyType == supplierFeature:true)
       );
     }
-    console.log(JSON.stringify(products ));
     return filteredProducts;
   }
-  const result = filteredData(data,capabilitie);
+  const result = filteredData(data,capabilitie,supplierFeature);
     return (
         <div className="flex justify-between mb-20">
                 <div className="w-1/4">
@@ -32,8 +36,13 @@ const Active2 = ({data}) => {
                       <div className="mt-5 text-[17px] font-[600] font-Roboto">Supplier attributes</div>
                       <div className="flex-col flex text-[15px]">
 
+                      <label className="mt-1">
+                          <input onChange={handleChangeSupplierFeature} type="radio" value="" name="sf" />
+                          <span className="checkmark ml-2"></span>All
+                        </label>
+
                         <label className="mt-1 flex">
-                          <input onChange={{}} type="radio" value="" name="sf" />
+                          <input onChange={handleChangeSupplierFeature} type="radio" value="verified" name="sf" />
                           <div className="checkmark ml-2 flex text-[14px]">
                             <img className="max-w-10 max-h-5" src="https://s.alicdn.com/@img/imgextra/i2/O1CN01RTQpCr1aufaXTtWv5_!!6000000003390-2-tps-83-32.png?webp=close" width="45" ></img>
 
@@ -42,7 +51,7 @@ const Active2 = ({data}) => {
                         </label>
 
                         <label className="mt-1 flex">
-                          <input onChange={{}} type="radio" value="" name="sf" />
+                          <input onChange={handleChangeSupplierFeature} type="radio" value="verifiedPro" name="sf" />
                           <div className="checkmark ml-2 flex text-[14px]">
                             <img className="" src="https://s.alicdn.com/@img/imgextra/i4/O1CN017JpSfh1MBsEOBrKwl_!!6000000001397-2-tps-135-32.png?webp=close" width="70" ></img>
 
@@ -51,7 +60,7 @@ const Active2 = ({data}) => {
                         </label>
 
                         <label className="mt-1 flex">
-                          <input onChange={{}} type="radio" value="" name="sf" />
+                          <input onChange={handleChangeSupplierFeature} type="radio" value="" name="sf" />
                           <div className="checkmark ml-2 text-[14px]">
                             <span></span>≤1h response time
                           </div>
@@ -93,6 +102,11 @@ const Active2 = ({data}) => {
                     <div className="ml-3 pb-10">
                       <div className="mt-5 text-[15px] font-[600] font-Roboto mb-1">Capabilities</div>
                       <div className="flex-col flex text-[15px]">
+
+                        <label className="mt-1">
+                          <input onChange={handleChangeCapabilitie} type="radio" value="" name="capabilities" />
+                          <span className="checkmark ml-2"></span>All
+                        </label>
 
                         <Input
                           handleChange={handleChangeCapabilitie}

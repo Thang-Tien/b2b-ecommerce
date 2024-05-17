@@ -13,13 +13,15 @@ const Active1 = ({data}) => {
   }
   function filteredData(products, price, rating) {
     let filteredProducts = products;
-
+    if(rating===null) {
+      setRating(0);
+    }
     // Applying selected filter
     if (price || rating) {
       filteredProducts = filteredProducts.filter(
         ({ discountPrice,ratings}) =>
         (Number(price.split("-")[0]) <= discountPrice) && (discountPrice <= Number(price.split("-")[1]))  &&
-        ratings >= rating
+        (rating !=""?ratings >= rating:true )
       );
     }
 
@@ -70,7 +72,7 @@ const Active1 = ({data}) => {
                       <div className="mt-5 text-[15px] font-[600] font-Roboto">Price</div>
                       <div className="flex-col flex text-[15px]">
                         <label className="mt-1">
-                          <input onChange={handleChangePrice} type="radio" value="" name="price" />
+                          <input onChange={handleChangePrice} type="radio" value="0-1000000" name="price" />
                           <span className="checkmark ml-2"></span>All
                         </label>
                         <Input
@@ -109,6 +111,10 @@ const Active1 = ({data}) => {
                       </div>
                       <div className="mt-2 text-[13px] text-slate-400">Based on a 5-star rating system</div>
                       <div className="flex-col flex text-[15px]">
+                      <label className="mt-1">
+                          <input onChange={handleChangeRating} type="radio" value="" name="review" />
+                          <span className="checkmark ml-2"></span>All
+                        </label>
                         <Input
                           handleChange={handleChangeRating}
                           value={4}
