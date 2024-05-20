@@ -18,7 +18,15 @@ const ShopCreate = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [type, setType] = useState("");
-     
+  const [supplierAttribute, setAttribute] = useState(
+    {
+      verifyType: "verified",
+      yearOfExperience: "10+",
+      numberOfStaff: String,
+      area: String,
+      netWorth: String,
+    }
+  )
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -33,6 +41,7 @@ const ShopCreate = () => {
     newForm.append("address", address);
     newForm.append("phoneNumber", phoneNumber);
     newForm.append("type", type);
+    newForm.append("supplierAttribute", supplierAttribute);
     axios
       .post(`${server}/shop/create-shop`, newForm, config)
       .then((res) => {
@@ -45,10 +54,12 @@ const ShopCreate = () => {
         setAddress("");
         setPhoneNumber();
         setType("");
+        setAttribute("");
       })
       .catch((error) => {
         toast.error(error.response.data.message);
       });
+
   };
 
   const handleFileInputChange = (e) => {
@@ -182,6 +193,71 @@ const ShopCreate = () => {
                 />
               </div>
             </div>
+
+
+            <div className="flex">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Area
+              </label>
+              <div className="mt-1">
+                <input
+                  type="area"
+                  name="area"
+                  required
+                  value={supplierAttribute.area}
+                  onChange={(e) => setAttribute({ ...supplierAttribute, area: e.target.value })}
+                  className="appearance-none block w-3/4 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="m²"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                NetWorth
+              </label>
+              <div className="mt-1">
+                <input
+                  type="networth"
+                  name="networth"
+                  required
+                  value={supplierAttribute.netWorth}
+                  onChange={(e) => setAttribute({ ...supplierAttribute, netWorth: e.target.value })}
+                  className="appearance-none block w-3/4 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="US"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Staff
+              </label>
+              <div className="mt-1">
+                <input
+                  type="staff"
+                  name="staff"
+                  required
+                  value={supplierAttribute.numberOfStaff}
+                  onChange={(e) => setAttribute({ ...supplierAttribute, numberOfStaff: e.target.value })}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  placeholder="Number of Staff"
+                />
+              </div>
+            </div>
+
+            </div>
+            
 
             <div>
               <label
